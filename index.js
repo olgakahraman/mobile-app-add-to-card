@@ -13,8 +13,6 @@ const app = initializeApp(appSettings);
 const database = getDatabase(app);
 const shoppingListInDB = ref(database, "shoppingList");
 
-console.log(app);
-
 const addButtonEl = document.querySelector("#add-button");
 const inputFieldEl = document.querySelector("#input-field");
 const shoppingListEl = document.querySelector("#shopping-list");
@@ -23,15 +21,14 @@ addButtonEl.addEventListener("click", function () {
   let inputValue = inputFieldEl.value;
   push(shoppingListInDB, inputValue);
   console.log(`${inputValue} added to database`);
-
-  appendItemToShoppingListEl(inputValue);
   clearInputFieldEl();
+  appendItemToShoppingListEl(inputValue);
 });
-
-function appendItemToShoppingListEl(itemValue) {
-  shoppingListEl.innerHTML += `<li>${itemValue}</li>`;
-}
 
 function clearInputFieldEl() {
   inputFieldEl.value = "";
+}
+
+function appendItemToShoppingListEl(itemValue) {
+  shoppingListEl.innerHTML += `<li>${itemValue}</li>`;
 }
