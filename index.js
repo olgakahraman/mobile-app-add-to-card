@@ -25,10 +25,17 @@ addButtonEl.addEventListener("click", function () {
 });
 
 onValue(shoppingListInDB, function (snapshot) {
-  let itemsArray = Object.values(snapshot.val());
+  
+  let itemsArray = Object.entries(snapshot.val());
+  
   clearShoppingListEl();
+  
   for (let i = 0; i < itemsArray.length; i++) {
-    appendItemToShoppingListEl(itemsArray[i]);
+let currentItem = itemsArray[i];
+let currentsItemID = currentItem[0];
+let currentsItemValue = currentItem[1];
+
+    appendItemToShoppingListEl(currentsItemValue);
   }
 });
 function clearShoppingListEl() {
