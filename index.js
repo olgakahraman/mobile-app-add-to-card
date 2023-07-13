@@ -4,6 +4,7 @@ import {
   ref,
   push,
   onValue,
+  remove
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 const appSettings = {
@@ -35,7 +36,7 @@ let currentItem = itemsArray[i];
 let currentsItemID = currentItem[0];
 let currentsItemValue = currentItem[1];
 
-    appendItemToShoppingListEl(currentsItemValue);
+    appendItemToShoppingListEl(currentItem);
   }
 });
 function clearShoppingListEl() {
@@ -52,5 +53,10 @@ function appendItemToShoppingListEl(item) {
 
   let newEl = document.createElement("li");
   newEl.textContent = itemValue;
+
+  newEl.addEventListener("click", function(){
+ let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`)
+ remove(exactLocationOfItemInDB);
+  })
   shoppingListEl.append(newEl);
 }
